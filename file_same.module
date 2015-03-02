@@ -16,6 +16,12 @@ function file_same_file_validate($file) {
     $fid = $query->execute()->fetchField();
     //\Drupal\ko\Debug::watchdog($fid);
     if ($fid) {
+      $file_orig = file_load($fid);
+      // Copy data to the filesystem if the file is not exist.
+      if (!file_exists($file_orig->uri)) {
+        //$errors[] = t('File fid @fid is not exist in the filesystem, deal with it first.', array('@fid' => $fid));
+        file_unmanaged_copy($file->uri, $file_orig->uri, FILE_EXISTS_REPLACE);
+      }
       $file->fid = $fid;
       break;
     }
