@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * Implements hook_file_validate().
+ */
+function file_same_file_validate($file) {
+  $errors = array();
+  //\Drupal\ko\Debug::watchdog($file);
+  foreach (filehash_algos() as $algo) {
+    // @todo Consider using filemime as well.
+    $query = db_select('filehash', 'fh')
+      ->fields('fh', array('fid'));
+    $query->join('file_managed', 'fm', 'fh.fid = fm.fid');
+    $db_condition = db_and()->condition('fh.' . $algo, hash_file($algo, $file->uri))->condition('fm.filesize', $file->filesize);
+    $query->condition($db_condition);
+    $fid = $query->execute()->fetchField();
+    //\Drupal\ko\Debug::watchdog($fid);
+    if ($fid) {
+      $file->fid = $fid;
+      break;
+    }
+  }
+
+  return $errors;
+}

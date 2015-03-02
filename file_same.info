@@ -1,0 +1,7 @@
+name = Field same
+description = Assign the same fid to file field instead of uploading another same file.
+core = 7.x
+
+dependencies[] = filehash
+
+version = 7.x-1.x
