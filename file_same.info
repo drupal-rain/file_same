@@ -1,5 +1,5 @@
-name = Field same
-description = Assign the same fid to file field instead of uploading another same file.
+name = File same
+description = Assign the same fid to file object when in file upload process, this forces to use same file instead of uploading another same file.
 core = 7.x
 
 dependencies[] = filehash
