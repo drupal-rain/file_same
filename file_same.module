@@ -2,6 +2,10 @@
 
 /**
  * Implements hook_file_validate().
+ *
+ * This only affect upload file, not affect programmically create managed file.
+ * @see file_save_upload().
+ * @see file_validate().
  */
 function file_same_file_validate($file) {
   $errors = array();
