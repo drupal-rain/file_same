@@ -1,5 +1,7 @@
 <?php
 
+// @todo Keep an eye on if upload empty file cause issue.
+
 /**
  * Implements hook_file_validate().
  *
